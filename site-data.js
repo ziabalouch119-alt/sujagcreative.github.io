@@ -7,8 +7,10 @@
 /* Contact details (used on every page) */
 const SITE = {
   name: "SUJAG Creative",
-  phone: "0324 3105356",            /* shown on the site */
-  phoneIntl: "923243105356",        /* same number, no + or spaces, starts with 92 */
+  phone: "0304 0962799",            /* shown on the site */
+  phoneIntl: "923040962799",        /* same number, no + or spaces, starts with 92 */
+  whatsapp: "0325 3061605",
+  whatsappIntl: "923253061605",
   whatsappMessage: "Hello SUJAG Creative, I would like to discuss a project.",
   location: "Khairpur Mir's, Sindh, Pakistan",
   email: "",                        /* add your email here when you have one */
@@ -26,9 +28,9 @@ const GA_ID = "";
    Format: {name: "", type: "", status: "", year: "", desc: "", tags: ["", ""], link: "", result: ""} */
 const PROJECTS = [
   {name: "SALU Community", type: "website", status: "Completed", year: "2026",
-   desc: "A student support platform for Shah Abdul Latif University, Khairpur. It has 16 pages with merit lists, fee structure, department seats, an aggregate calculator, past papers with an online quiz, announcements, and an installable mobile app.",
-   tags: ["HTML", "CSS", "JavaScript", "PWA", "SEO", "Analytics"], link: "https://salucommunity.github.io/",
-   result: "700+ visitors and 100+ app installs in the first month."}
+   desc: "An independent student guidance platform for Shah Abdul Latif University, Khairpur, with admissions and merit lists, 28 departments across 7 faculties, seats and fees, scholarships, an aggregate calculator, past papers, quizzes and free mock tests.",
+   tags: ["Education", "Student guidance", "Interactive tools"], link: "https://salucommunity.github.io/",
+   image: "assets/salu-community-website.jpg", result: ""}
 ];
 
 /* Client reviews. Leave empty [] to hide the section.
