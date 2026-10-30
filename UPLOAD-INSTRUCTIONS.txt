@@ -1,0 +1,16 @@
+SUJAG CREATIVE — OPTIMIZED WEBSITE
+
+1. Extract the ZIP on your phone or computer.
+2. In your GitHub Pages repository, choose Add file > Upload files.
+3. Upload all extracted HTML files (including index.html), robots.txt,
+   sitemap.xml and .nojekyll if your file manager shows it. Replace old files
+   with the same names and commit the changes.
+4. Wait for GitHub Pages to publish, then refresh the website.
+
+Each HTML page includes its optimized images, styles and scripts.
+There is no assets folder to upload and no image paths to break.
+Do not upload the ZIP file itself as the website.
+
+Email: sujagcreative@gmail.com
+WhatsApp: 0325 3061605
+Phone: 0304 0962799

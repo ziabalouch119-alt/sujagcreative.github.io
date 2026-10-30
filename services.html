@@ -12,18 +12,265 @@
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%232563eb'/%3E%3Cstop offset='1' stop-color='%2306b6d4'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='16' fill='url(%23g)'/%3E%3Ctext x='32' y='43' font-family='Arial' font-weight='800' font-size='32' text-anchor='middle' fill='white'%3ES%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
+<style>
+:root{--ink:#0b1530;--mute:#526082;--bg:#f3f6fd;--white:#fff;--b50:#eef4ff;--b100:#dbe7ff;--b200:#bcd2ff;--b600:#2563eb;--b700:#1d4ed8;--b900:#0b2a6f;--cy:#06b6d4;--vi:#7c3aed;--sh:0 10px 30px rgba(37,99,235,.10);--r:20px}
+*{box-sizing:border-box;margin:0}html{-webkit-text-size-adjust:100%}
+body{font-family:"Plus Jakarta Sans",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;color:var(--ink);background:var(--bg);line-height:1.65;overflow-x:hidden}
+a{color:var(--b600)}img,svg{max-width:100%}:focus-visible{outline:3px solid var(--b600);outline-offset:3px;border-radius:8px}
+.wrap{max-width:1160px;margin:0 auto;padding:0 18px}section{padding:64px 0}
+h1,h2,h3{line-height:1.15;letter-spacing:-.02em}h2{font-size:clamp(26px,5vw,38px);font-weight:800;margin-bottom:10px}h3{font-size:19px;font-weight:700;margin-bottom:6px}
+.eyebrow{display:inline-block;font-size:13px;font-weight:700;color:var(--b700);background:var(--b50);border:1.5px solid var(--b200);border-radius:99px;padding:4px 14px;margin-bottom:14px}
+.sub{color:var(--mute);max-width:62ch;margin-bottom:28px}.center{text-align:center}.center .sub{margin-inline:auto}
+header.site{position:sticky;top:0;z-index:50;padding:10px 12px 0}
+.bar{max-width:1160px;margin:0 auto;display:flex;align-items:center;gap:14px;padding:9px 14px;background:rgba(255,255,255,.82);-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);border:1.5px solid var(--b200);border-radius:18px;box-shadow:var(--sh)}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--ink);font-weight:800;font-size:18px;margin-right:auto}.brand b{color:var(--b600)}
+.mark{width:38px;height:38px;border-radius:12px;background:linear-gradient(135deg,var(--b600),var(--cy));color:#fff;display:grid;place-items:center;font-weight:800;box-shadow:0 6px 16px rgba(37,99,235,.35)}
+nav.main{display:none;gap:4px}nav.main a{padding:8px 14px;border-radius:12px;text-decoration:none;color:var(--mute);font-weight:600;font-size:15px}nav.main a:hover{color:var(--b700);background:var(--b50)}nav.main a.on{background:var(--b50);color:var(--b700)}
+.burger{border:0;background:var(--b50);width:42px;height:42px;border-radius:12px;cursor:pointer;display:grid;place-items:center;color:var(--b700)}.burger svg{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:2.2}
+#drawer{display:none;max-width:1160px;margin:8px auto 0;padding:10px;background:rgba(255,255,255,.96);border:1.5px solid var(--b200);border-radius:18px;box-shadow:var(--sh)}#drawer.open{display:block}
+#drawer a{display:block;padding:12px 14px;border-radius:12px;color:var(--ink);text-decoration:none;font-weight:700}#drawer a.on{background:var(--b50);color:var(--b700)}
+@media(min-width:900px){nav.main{display:flex}.burger{display:none}#drawer{display:none!important}}
+.btn{display:inline-flex;align-items:center;gap:8px;border:0;cursor:pointer;font:inherit;font-weight:700;font-size:15px;padding:12px 22px;border-radius:14px;text-decoration:none;color:#fff;background:linear-gradient(135deg,var(--b600),var(--cy));box-shadow:0 8px 20px rgba(37,99,235,.32);transition:transform .2s,box-shadow .2s}
+.btn:hover{transform:translateY(-2px);box-shadow:0 12px 26px rgba(37,99,235,.4)}.btn:active{transform:scale(.97)}
+.btn.alt{background:#fff;color:var(--b700);box-shadow:0 4px 14px rgba(11,21,48,.14)}.btn.line{background:transparent;color:#fff;border:1.5px solid rgba(255,255,255,.5);box-shadow:none}
+.btn svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2}.btns{display:flex;flex-wrap:wrap;gap:12px}
+.hero{position:relative;overflow:hidden;color:#fff;padding:78px 0 70px;background:linear-gradient(135deg,#050d24,#0b2a6f 58%,#1d4ed8)}
+.hero::before,.hero::after{content:"";position:absolute;border-radius:50%;filter:blur(70px);opacity:.55;animation:float 14s ease-in-out infinite alternate}
+.hero::before{width:380px;height:380px;background:#06b6d4;top:-120px;right:-80px}.hero::after{width:340px;height:340px;background:#7c3aed;bottom:-140px;left:-90px;animation-delay:-6s}
+@keyframes float{to{transform:translate(40px,30px) scale(1.12)}}
+.hero .wrap{position:relative;z-index:1;display:grid;gap:36px;align-items:center}.hero h1{font-size:clamp(34px,7vw,60px);font-weight:800;margin-bottom:16px}
+.hero p.lead{font-size:18px;color:#cfe0ff;max-width:56ch;margin-bottom:26px}.hero .eyebrow{background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.3);color:#fff}
+.rot{background:linear-gradient(90deg,#67e8f9,#a5b4fc);-webkit-background-clip:text;background-clip:text;color:transparent;display:inline-block;transition:opacity .35s,transform .35s}.rot.out{opacity:0;transform:translateY(10px)}
+.mock{border-radius:22px;background:rgba(255,255,255,.1);border:1.5px solid rgba(255,255,255,.28);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);padding:16px;box-shadow:0 24px 60px rgba(0,0,0,.35);animation:bob 6s ease-in-out infinite alternate}
+@keyframes bob{to{transform:translateY(-12px)}}.dots{display:flex;gap:6px;margin-bottom:14px}.dots i{width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,.55)}
+.ln{height:10px;border-radius:6px;background:rgba(255,255,255,.22);margin:10px 0}.ln.a{width:70%;background:linear-gradient(90deg,#67e8f9,#818cf8)}.ln.b{width:90%}.ln.c{width:55%}
+.tiles{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}.tiles i{height:64px;border-radius:14px;background:rgba(255,255,255,.16)}.tiles i:first-child{background:linear-gradient(135deg,rgba(103,232,249,.7),rgba(129,140,248,.7))}
+@media(min-width:900px){.hero .wrap{grid-template-columns:1.15fr .85fr}}
+.stats{margin-top:-34px;position:relative;z-index:2;padding:0}.stat-grid{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(200px,1fr))}
+.card{background:#fff;border:1.5px solid var(--b200);border-radius:var(--r);box-shadow:var(--sh);padding:22px;transition:transform .25s,border-color .25s,box-shadow .25s}.card:hover{transform:translateY(-4px);border-color:var(--b600);box-shadow:0 16px 36px rgba(37,99,235,.18)}
+.stat{text-align:center}.stat b{display:block;font-size:44px;font-weight:800;line-height:1.1;background:linear-gradient(135deg,var(--b600),var(--cy));-webkit-background-clip:text;background-clip:text;color:transparent}.stat span{color:var(--mute);font-weight:600}
+.marq{overflow:hidden;padding:6px 0;-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
+.track{display:flex;gap:16px;width:max-content;animation:scroll 38s linear infinite}.marq:hover .track{animation-play-state:paused}@keyframes scroll{to{transform:translateX(-50%)}}
+.logo{display:flex;flex-direction:column;align-items:center;gap:8px;min-width:118px;padding:16px 14px;background:#fff;border:1.5px solid var(--b200);border-radius:18px;box-shadow:var(--sh);font-weight:700;font-size:13.5px;color:var(--mute)}.logo svg{width:38px;height:38px}
+.grid{display:grid;gap:16px;grid-template-columns:repeat(auto-fill,minmax(260px,1fr))}
+.ico{width:52px;height:52px;border-radius:16px;background:linear-gradient(135deg,var(--b600),var(--cy));display:grid;place-items:center;margin-bottom:14px;box-shadow:0 8px 18px rgba(37,99,235,.3)}.ico svg{width:26px;height:26px;fill:none;stroke:#fff;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.card p,.card li{color:var(--mute);font-size:15px}.card ul{padding-left:18px;margin-top:8px}
+.steps{counter-reset:s}.step{position:relative;padding-top:54px}.step::before{counter-increment:s;content:counter(s);position:absolute;top:14px;left:22px;width:32px;height:32px;border-radius:10px;background:var(--b900);color:#fff;font-weight:800;display:grid;place-items:center}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:22px}.chip{font:inherit;font-weight:700;font-size:14px;padding:7px 16px;border-radius:99px;border:1.5px solid var(--b200);background:#fff;color:var(--b700);cursor:pointer}.chip.on{background:var(--b600);border-color:var(--b600);color:#fff}
+.proj{display:flex;flex-direction:column;gap:8px;padding:0;overflow:hidden}.proj .top{height:140px;background:linear-gradient(135deg,var(--b900),var(--b600) 60%,var(--cy));display:flex;align-items:flex-end;padding:14px;position:relative}
+.proj .top span{background:rgba(255,255,255,.2);border:1px solid rgba(255,255,255,.4);color:#fff;font-size:12.5px;font-weight:700;border-radius:99px;padding:3px 12px;-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
+.proj .body{padding:6px 22px 22px;display:flex;flex-direction:column;gap:8px;flex:1}.tags{display:flex;flex-wrap:wrap;gap:6px}.tags i{font-style:normal;font-size:12.5px;font-weight:700;background:var(--b50);color:var(--b700);border-radius:8px;padding:3px 10px}
+.result{font-size:14px;font-weight:600;color:#0e7a55}.empty{border-style:dashed;text-align:center;color:var(--mute);display:grid;place-items:center;min-height:200px}
+.cta{background:linear-gradient(135deg,#050d24,#0b2a6f 60%,#1d4ed8);color:#fff;border-radius:28px;padding:44px 26px;text-align:center;position:relative;overflow:hidden}.cta p{color:#cfe0ff;max-width:52ch;margin:0 auto 22px}.cta .btns{justify-content:center}
+.contact{display:grid;gap:18px}@media(min-width:900px){.contact{grid-template-columns:1fr 1.1fr}}
+.row{display:flex;gap:14px;align-items:flex-start;padding:14px 0;border-bottom:1.5px solid var(--b100)}.row:last-of-type{border:0}.row .ico{margin:0;flex-shrink:0}.row small{color:var(--mute);display:block}.row a{font-weight:700;text-decoration:none;color:var(--ink);font-size:18px}
+label{display:block;font-weight:700;font-size:14px;margin:12px 0 5px}input,select,textarea{width:100%;font:inherit;padding:12px 14px;border:1.5px solid var(--b200);border-radius:12px;background:#fff;color:var(--ink)}textarea{min-height:120px;resize:vertical}
+iframe.map{width:100%;height:260px;border:0;border-radius:16px;margin-top:14px}
+details{background:#fff;border:1.5px solid var(--b200);border-radius:16px;padding:14px 18px;margin-bottom:10px}summary{cursor:pointer;font-weight:700}details p{color:var(--mute);margin-top:8px}
+footer.site{background:#050d24;color:#b9c9ee;padding:48px 0 24px;margin-top:40px}footer.site .cols{display:grid;gap:26px;grid-template-columns:repeat(auto-fit,minmax(200px,1fr))}
+footer.site h4{color:#fff;margin-bottom:10px}footer.site a{color:#b9c9ee;display:block;text-decoration:none;padding:4px 0}footer.site a:hover{color:#fff}footer.site .copy{border-top:1px solid rgba(255,255,255,.14);margin-top:28px;padding-top:18px;font-size:14px}
+.crumbs{font-size:13.5px;color:var(--mute);margin-bottom:12px}.page-head{padding:46px 0 30px;background:linear-gradient(180deg,var(--b100),var(--bg))}
+.wa{position:fixed;right:16px;bottom:16px;z-index:60;width:56px;height:56px;border-radius:50%;background:#22c55e;display:grid;place-items:center;box-shadow:0 10px 24px rgba(34,197,94,.45);transition:transform .2s}.wa:hover{transform:scale(1.08)}.wa svg{width:28px;height:28px;fill:#fff}
+.js .rv{opacity:0;transform:translateY(22px);transition:opacity .7s cubic-bezier(.22,1,.36,1),transform .7s cubic-bezier(.22,1,.36,1);transition-delay:var(--d,0ms)}.js .rv.in{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.js .rv{opacity:1;transform:none}.marq{overflow-x:auto}}
+.burger{flex-shrink:0}.bar .btn{white-space:nowrap}
+@media(max-width:640px){.bar .btn{display:none}.brand{font-size:17px}}
+/* Premium website showcases */
+.hero-art{position:relative;min-width:0;transform:rotate(-3deg);padding:14px 0 25px}.hero-art img{display:block;width:100%;height:auto;border-radius:22px;box-shadow:0 30px 70px #0004;border:1px solid #ffffff5e}.hero-art-label{position:absolute;right:15px;bottom:10px;padding:10px 15px;border-radius:12px;background:#fff;color:#163c87;font-size:11px;font-weight:700;box-shadow:0 10px 24px #0002;transform:rotate(3deg)}
+.business-showcase{background:#fff;padding:100px 0 85px;margin-top:40px}.showcase-row{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:65px;align-items:center}.showcase-copy{min-width:0}.showcase-copy .eyebrow{font-size:11px;text-transform:uppercase;letter-spacing:1.1px;background:transparent;padding:0;border:0;color:#1764c5}.showcase-copy h2{font-size:clamp(32px,3.5vw,47px);line-height:1.13;letter-spacing:-1.8px;margin-bottom:24px;max-width:15ch}.showcase-copy h2 em{font-style:normal;color:#1779cf}.showcase-copy>p{font-size:16px;line-height:1.85;color:#63708a;margin-bottom:24px}.showcase-benefits{list-style:none;padding:0;display:grid;gap:11px;margin:0 0 30px;font-size:14px;font-weight:600;color:#334765}.showcase-benefits li:before{content:'✓';display:inline-grid;place-items:center;width:23px;height:23px;background:#e7f5ff;color:#157ac8;border-radius:50%;margin-right:12px}.showcase-copy .btn{background:#1265bd;box-shadow:0 8px 18px #1265bd23;border-radius:10px;gap:22px}
+.design-gallery{min-width:0}.art-stage{position:relative;padding:52px 18px 45px;border:1px solid #d5e4fb;border-radius:25px;background:radial-gradient(ellipse at 70% 40%,#b9d9ff80,transparent 65%),#edf5ff;overflow:hidden}.art-stage:before{content:'';position:absolute;width:190px;height:190px;border:1px solid #ffffffb3;border-radius:50%;right:-80px;top:-55px}.stage-note{position:absolute;top:21px;left:24px;color:#6381a9;font-size:9px;letter-spacing:1.7px;font-weight:700}.art-stage img{display:block;width:100%;height:auto;transform:rotate(-3deg);border-radius:14px;box-shadow:0 22px 36px #154a9422}.stage-pill{position:absolute;right:20px;bottom:15px;font-size:10px;background:#fff;color:#24518e;padding:9px 14px;box-shadow:0 5px 15px #1b4d7512;border-radius:9px}.stage-pill span{margin-left:12px;color:#178bd2}.concept-controls{display:flex;gap:8px;margin-top:16px}.concept-tab{flex:1;display:flex;gap:10px;align-items:center;text-align:left;cursor:pointer;border:1px solid #d7e4f5;background:#fff;padding:12px 10px;border-radius:10px;font:inherit;font-size:10px;font-weight:700;color:#7d8da6;min-height:48px}.concept-tab span{font-size:11px}.concept-tab.active{background:#eff6ff;color:#1265bd;border-color:#80b4ec}.concept-disclaimer{font-size:10px!important;color:#8090a8!important;margin-top:12px;letter-spacing:.2px}.portfolio-showcase{background:#f1f6fd;padding:85px 0}.portfolio-row{grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr)}.portfolio-art{min-width:0;background:white;border:1px solid #d7e4f5;padding:18px;border-radius:22px;box-shadow:0 24px 60px #1b4b8310}.project-browser{overflow:hidden;border-radius:14px;background:#e7efff}.project-browser img{width:100%;height:auto;display:block}.project-caption{display:flex;align-items:center;justify-content:space-between;padding:20px 3px 2px}.project-caption small{font-size:9px;color:#7187a5;letter-spacing:1.4px}.project-caption h3{font-size:21px;margin:6px 0 0}.project-caption a{display:grid;place-items:center;width:43px;height:43px;border:1px solid #d7e4f5;border-radius:50%;text-decoration:none;font-size:22px;color:#1265bd}.project-caption a:hover{background:#edf5ff}.project-detail{border-top:1px solid #ceddf0;padding-top:23px;margin-bottom:28px}.project-detail>span{font-size:9px;font-weight:700;color:#1764c5;letter-spacing:1.3px}.project-detail h3{font-size:19px;margin:13px 0 10px}.project-detail p{font-size:14px;color:#63708a;line-height:1.85}.project-cover{display:block;width:100%;height:auto;object-fit:cover}.proj .top{height:auto;min-height:45px;background:#edf5ff;padding:10px 20px}.proj .top span{background:#fff;border-color:#d7e4f5;color:#1764c5}.proj .body{padding-top:12px}
+@media(max-width:899px){.showcase-row,.portfolio-row{grid-template-columns:1fr;gap:35px}.business-showcase{padding:60px 0}.portfolio-showcase{padding:60px 0}.showcase-copy h2{max-width:22ch;letter-spacing:-1px}.showcase-copy>p{max-width:58ch}.portfolio-row .showcase-copy{grid-row:1}.hero-art{max-width:600px;margin:auto;width:100%;transform:none}.hero-art-label{transform:none}.art-stage{padding:45px 15px 40px}.concept-tab span{font-size:12px}}
+@media(max-width:420px){.showcase-row{gap:28px}.showcase-copy h2{font-size:32px}.showcase-copy>p{font-size:15px}.concept-tab{gap:7px;padding:10px 8px}.concept-tab span{font-size:10px}.portfolio-art{padding:12px}.hero-art-label{font-size:9px}.showcase-copy .btn{font-size:13px}.project-caption h3{font-size:19px}}
+/* Supplied design references and industry categories */
+.reference-showcase .showcase-copy h2{max-width:22ch;margin:0 auto 22px;font-size:clamp(32px,4.4vw,52px);letter-spacing:-1.5px}.reference-showcase .showcase-copy>p{max-width:63ch;margin:0 auto 38px}.reference-slider{max-width:880px;margin:0 auto;padding:28px 34px 22px;background:#e6f4fc;border:2px solid #1895cc;border-radius:20px;box-shadow:0 16px 45px #1565a414}.reference-slides{position:relative}.reference-slide[hidden]{display:none}.reference-slide img{display:block;width:100%;height:auto;aspect-ratio:4/3;object-fit:contain;border-radius:8px}.slider-arrow{position:absolute;top:50%;transform:translateY(-50%);width:44px;height:52px;border:0;border-radius:12px;background:#ffffffeb;color:#0873af;font:500 44px/1 system-ui;cursor:pointer;box-shadow:0 5px 16px #0a477322}.slider-arrow:hover{background:#0873af;color:#fff}.slider-arrow.previous{left:-20px}.slider-arrow.next{right:-20px}.slider-bottom{display:grid;justify-items:center;gap:12px;padding-top:22px}.slider-dots{display:flex;align-items:center;gap:2px}.slider-dot{display:grid;place-items:center;width:36px;height:36px;background:none;border:0;border-radius:50%;cursor:pointer}.slider-dot:before{content:'';width:12px;height:12px;background:#78afcf;border-radius:50%;transition:background .2s,transform .2s}.slider-dot.active:before{background:#0871b0;transform:scale(1.2)}.slider-caption{color:#316887;font-size:12px;font-weight:600;text-align:center}.showcase-cta{margin-top:24px}.reference-showcase .concept-disclaimer{margin-top:16px}.industries-section{background:#fff;padding:85px 0}.industries-section h2 em{font-style:normal;color:#147bc2}.industry-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:38px 30px;max-width:1050px;margin:38px auto 0}.industry-card{text-align:center;min-width:0}.industry-frame{padding:10px;background:#fafbfd;border:1px solid #e0e6ed;overflow:hidden;border-radius:14px;transition:transform .2s,box-shadow .2s}.industry-card:hover .industry-frame{transform:translateY(-4px);box-shadow:0 16px 30px #174f8319}.industry-photo{width:100%;aspect-ratio:1;background-repeat:no-repeat;border-radius:6px}.industry-card h3{font-size:17px;letter-spacing:.2px;text-transform:uppercase;margin:18px 0 0}.industry-contact{margin-top:40px}.industry-contact .btn{font-size:14px}.reference-showcase{scroll-margin-top:85px}#industries{scroll-margin-top:85px}
+@media(max-width:899px){.industry-grid{grid-template-columns:repeat(2,minmax(0,1fr));max-width:650px;gap:32px 22px}.industries-section{padding:60px 0}.reference-slider{padding:23px 24px 16px}.reference-showcase .showcase-copy h2{max-width:22ch}.reference-showcase .showcase-copy>p{font-size:16px}}
+@media(max-width:480px){.reference-showcase .showcase-copy h2{font-size:32px;max-width:20ch;letter-spacing:-1px}.reference-slider{border-radius:14px;padding:19px 17px 12px}.slider-arrow{width:32px;height:42px;font-size:34px;border-radius:8px}.slider-arrow.previous{left:-13px}.slider-arrow.next{right:-13px}.slider-bottom{padding-top:12px;gap:4px}.slider-caption{font-size:10px}.industry-grid{gap:30px 18px}.industry-frame{padding:6px;border-radius:9px}.industry-photo{border-radius:4px}.industry-card h3{font-size:14px;margin-top:14px}.industry-contact .btn{font-size:12px;padding:12px 14px}}
+/* Continuous client and platform logo marquee */
+.clients-section{padding:70px 0;background:#f2f7fd;scroll-margin-top:90px}.clients-section h2 em{font-style:normal;color:#147bc2}.clients-section .sub{max-width:55ch}.clients-marquee{overflow:hidden;padding:8px 0 22px;-webkit-mask-image:linear-gradient(90deg,transparent,#000 3%,#000 97%,transparent);mask-image:linear-gradient(90deg,transparent,#000 3%,#000 97%,transparent)}.clients-track{display:flex;width:max-content;animation:clients-scroll 32s linear infinite}.clients-group{display:flex;gap:24px;padding-right:24px}.client-logo-card{width:220px;flex-shrink:0;padding:18px 15px 16px;text-align:center;border-radius:16px;background:#fff;border:1px solid #dbe6f3;box-shadow:0 7px 20px #1c4a7810;display:flex;flex-direction:column;align-items:center}.client-logo-image{width:100%;height:142px;display:grid;place-items:center;margin-bottom:14px}.client-logo-image img{width:100%;height:100%;object-fit:contain;display:block}.client-logo-card span{color:#233b5e;font-weight:700;font-size:12px}.client-logo-card small{font-size:10px;color:#7c8ba3;margin-top:4px}.clients-marquee:hover .clients-track,.clients-marquee.paused .clients-track{animation-play-state:paused}.client-controls{text-align:center}.client-pause{font:inherit;font-size:11px;font-weight:600;color:#326c9c;cursor:pointer;border:1px solid #caddef;background:#fff;padding:8px 14px;border-radius:99px}.client-pause:hover{background:#e5f0fc}@keyframes clients-scroll{to{transform:translateX(-50%)}}
+@media(max-width:600px){.clients-section{padding:52px 0}.clients-group{gap:16px;padding-right:16px}.client-logo-card{width:180px;padding:15px 12px}.client-logo-image{height:120px}.client-logo-card span{font-size:11px}.clients-track{animation-duration:28s}}
+@media(prefers-reduced-motion:reduce){.clients-marquee{overflow-x:auto;mask-image:none;-webkit-mask-image:none}.clients-group[aria-hidden="true"]{display:none}.client-controls{display:none}}
+.client-logo-image{display:flex;align-items:center;justify-content:center;flex:none}.client-logo-image img{width:auto;height:auto;max-width:100%;max-height:100%}
+/* SALU Community featured project */
+.salu-featured{padding:80px 0;background:#eef5ff;scroll-margin-top:90px}.salu-featured h2 em{font-style:normal;color:#147bc2}.salu-project-card{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:48px;padding:32px;border:1px solid #d6e3f4;border-radius:26px;background:#fff;box-shadow:0 20px 60px #194f8610;align-items:start}.salu-project-visual{min-width:0;border:1px solid #dce6f5;border-radius:15px;overflow:hidden;background:#eef5ff}.salu-window-bar{padding:12px 14px;display:flex;gap:15px;align-items:center;background:#f5f8fe;color:#72839c;font-size:10px;border-bottom:1px solid #dce6f5}.salu-window-bar>span:first-child{letter-spacing:3px;font-size:8px;color:#9cb9de}.salu-screenshot{display:block;position:relative;aspect-ratio:720/1279;overflow:hidden;background:#dceafb}.salu-screenshot img{position:absolute;width:100%;height:auto;max-width:none;left:0;top:-14.464425%;display:block}.salu-image-caption{font-size:10px;color:#597496;text-align:center;padding:11px 10px}.salu-project-copy{padding:8px 0;min-width:0}.salu-project-tags{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:17px}.salu-project-tags span{padding:4px 10px;background:#eef5ff;border-radius:6px;color:#2164a5;font-size:10px;font-weight:700}.salu-project-copy h3{font-size:34px;margin-bottom:9px;letter-spacing:-1px}.salu-project-intro{font-size:17px!important;font-weight:600;color:#2568ad!important;margin-bottom:15px!important}.salu-project-copy>p{font-size:14px;color:#667792;line-height:1.85;margin-bottom:20px}.salu-highlights{display:grid;grid-template-columns:1fr 1fr;gap:14px;padding:18px 0;margin-bottom:22px;border-top:1px solid #e1eaf5;border-bottom:1px solid #e1eaf5}.salu-highlights strong{display:block;font-size:27px;color:#1265bd;line-height:1.1;margin-bottom:6px}.salu-highlights span{font-size:10px;font-weight:600;color:#6b7e99}.salu-project-copy h4{font-size:14px;margin-bottom:16px}.salu-features{padding:0;list-style:none;display:grid;gap:15px;margin-bottom:28px}.salu-features li{position:relative;padding-left:24px}.salu-features li:before{content:'✓';position:absolute;left:0;top:0;color:#1789b7;font-size:14px;font-weight:800}.salu-features strong{display:block;font-size:12px;margin-bottom:4px}.salu-features span{display:block;font-size:12px;line-height:1.7;color:#718099}.salu-project-copy .btn{font-size:13px;gap:20px}.salu-project-note{font-size:10px!important;margin:17px 0 7px!important;color:#7b8ba2!important}.salu-source{font-size:10px!important;margin:0!important}.salu-source a{color:#547fae}
+@media(max-width:899px){.salu-featured{padding:60px 0}.salu-project-card{gap:28px;padding:24px;grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr)}.salu-project-copy h3{font-size:28px}}
+@media(max-width:640px){.salu-project-card{grid-template-columns:1fr;padding:18px;gap:24px;border-radius:18px}.salu-project-visual{max-width:410px;width:100%;margin:auto}.salu-project-copy{padding:0 2px}.salu-project-copy h3{font-size:29px}.salu-project-copy>p{font-size:13px}.salu-project-intro{font-size:16px!important}.salu-features strong,.salu-features span{font-size:12px}}
+/* Custom Sujag Creative wordmark: header only */
+header.site .header-wordmark{display:flex;align-items:center;line-height:1;flex-shrink:0;gap:0;padding:0}header.site .header-wordmark img{display:block;width:188px;height:auto;max-width:100%}
+@media(max-width:640px){header.site .header-wordmark img{width:167px}}
+@media(max-width:360px){header.site .header-wordmark img{width:148px}}
+/* Gentle movement for the industry photographs. */
+.industry-photo{animation:industry-breathe 8s ease-in-out infinite alternate;transform-origin:center;transition:filter .4s}.industry-card:nth-child(2n) .industry-photo{animation-delay:-3s}.industry-card:nth-child(3n) .industry-photo{animation-delay:-5s}.industry-card:hover .industry-photo{animation-play-state:paused;filter:saturate(1.13)}.industry-frame{overflow:hidden}@keyframes industry-breathe{from{transform:scale(1)}to{transform:scale(1.065)}}
+@media(prefers-reduced-motion:reduce){.industry-photo{animation:none;transform:none;transition:none}}
+
+/* The featured screenshot is already trimmed during optimization. */
+.salu-screenshot img{top:0}
+.industry-photo{display:block;object-fit:cover;height:auto}
+footer.site a[data-email]{overflow-wrap:anywhere}
+.row a[data-email]{font-size:clamp(14px,3.8vw,18px);overflow-wrap:anywhere}
+
+</style>
 <script type="application/ld+json">[{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://sujagcreative.github.io/"},{"@type":"ListItem","position":2,"name":"Web Design, WordPress & App Development Services","item":"https://sujagcreative.github.io/services"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How much does a website cost?","acceptedAnswer":{"@type":"Answer","text":"The price depends on the pages and features you need. Send us a message on WhatsApp with your idea and we will share a clear quote before any work starts."}},{"@type":"Question","name":"How long does a project take?","acceptedAnswer":{"@type":"Answer","text":"A simple website is usually ready within a few days to two weeks. Larger apps take longer, and we give you a timeline up front."}},{"@type":"Question","name":"Will my website work on mobile phones?","acceptedAnswer":{"@type":"Answer","text":"Yes. Every site we build is mobile-first and tested on small phone screens, because most visitors use phones."}},{"@type":"Question","name":"Can I update the website myself later?","acceptedAnswer":{"@type":"Answer","text":"Yes. We build it so common content can be changed easily, or we use WordPress, and we show you how."}},{"@type":"Question","name":"Do you offer support after launch?","acceptedAnswer":{"@type":"Answer","text":"Yes. We help with updates, fixes and improvements after the site goes live."}}]}]</script>
 </head>
 <body>
-<header class="site"><div class="bar"><a class="brand header-wordmark" href="index.html" aria-label="Sujag Creative home"><img src="assets/sujag-creative-logo.png" width="2170" height="725" alt="Sujag Creative"></a><nav class="main" aria-label="Main"><a href="index.html">Home</a><a href="about.html">About</a><a href="services.html" class="on" aria-current="page">Services</a><a href="index.html#clients">Clients</a><a href="contact.html">Contact</a></nav><a class="btn" data-wa href="#" style="padding:9px 18px">Get a quote</a><button class="burger" aria-label="Menu" aria-expanded="false" aria-controls="drawer"><svg viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button></div><nav id="drawer" aria-label="Mobile"><a href="index.html">Home</a><a href="about.html">About</a><a href="services.html" class="on" aria-current="page">Services</a><a href="index.html#clients">Clients</a><a href="contact.html">Contact</a></nav></header>
+<header class="site"><div class="bar"><a class="brand header-wordmark" href="index.html" aria-label="Sujag Creative home"><img src="data:image/png;base64,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" alt="Sujag Creative" width="480" height="160" decoding="async"></a><nav class="main" aria-label="Main"><a href="index.html">Home</a><a href="about.html">About</a><a href="services.html" class="on" aria-current="page">Services</a><a href="index.html#clients">Clients</a><a href="contact.html">Contact</a></nav><a class="btn" data-wa href="https://wa.me/923253061605" style="padding:9px 18px">Get a quote</a><button class="burger" aria-label="Menu" aria-expanded="false" aria-controls="drawer"><svg viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button></div><nav id="drawer" aria-label="Mobile"><a href="index.html">Home</a><a href="about.html">About</a><a href="services.html" class="on" aria-current="page">Services</a><a href="index.html#clients">Clients</a><a href="contact.html">Contact</a></nav></header>
 <div class="page-head"><div class="wrap"><nav class="crumbs" aria-label="Breadcrumb"><a href="index.html">Home</a> / Services</nav><h1 style="font-size:clamp(30px,6vw,46px);font-weight:800">Our Services</h1><p class="sub" style="margin:10px 0 0">Everything you need to launch and grow online, built mobile-first.</p></div></div><main><section><div class="wrap"><div class="grid"><article class="card"><div class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/></svg></div><h3>Website Design & Development</h3><p>Fast, mobile-first business, portfolio and landing-page websites written in clean HTML, CSS and JavaScript.</p><ul><li>Responsive on every phone and screen</li><li>SEO-ready pages and fast loading</li><li>Contact forms and WhatsApp buttons</li></ul></article><article class="card"><div class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="7" y="2" width="10" height="20" rx="2"/><path d="M11 18h2"/></svg></div><h3>Web & Installable Apps</h3><p>Reactive web apps that work like real apps and can be installed on the home screen.</p><ul><li>Installable from the browser (PWA)</li><li>Works smoothly on slow internet</li><li>Dashboards, calculators and tools</li></ul></article><article class="card"><div class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M3 9h18M9 21V9"/></svg></div><h3>WordPress Websites</h3><p>Easy-to-manage WordPress sites so you can update content yourself.</p><ul><li>Custom theme setup and plugins</li><li>Blog, store and booking options</li><li>Training so you can edit it yourself</li></ul></article><article class="card"><div class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20h9M16.5 3.5a2.1 2.1 0 013 3L7 19l-4 1 1-4z"/></svg></div><h3>UI/UX Design in Figma</h3><p>Clear layouts and designs prepared in Figma before any code is written.</p><ul><li>Mobile and desktop screens</li><li>Brand colors, fonts and icons</li><li>Design approval before development</li></ul></article><article class="card"><div class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg></div><h3>SEO & Analytics Setup</h3><p>Be found on Google and see how many people visit and install.</p><ul><li>Page titles, descriptions and sitemap</li><li>Google Search Console and Analytics</li><li>Share-ready link previews</li></ul></article><article class="card"><div class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M9 12l2 2 4-4"/></svg></div><h3>Support & Maintenance</h3><p>We keep your site secure, updated and working after launch.</p><ul><li>Content and design updates</li><li>Fixes and speed improvements</li><li>Hosting and domain guidance</li></ul></article></div></div></section>
 <section><div class="wrap"><div class="center sec-h"><span class="eyebrow">How we work</span><h2>Our process</h2></div><div class="grid steps"><div class="card step"><h3>Discover</h3><p>We listen to your goals, audience and ideas, then agree the pages and features.</p></div><div class="card step"><h3>Design</h3><p>We prepare a clear layout and design so you can approve it before coding.</p></div><div class="card step"><h3>Build</h3><p>We develop a fast, responsive site and test it on real phones.</p></div><div class="card step"><h3>Launch & support</h3><p>We publish it, set up analytics and keep helping after launch.</p></div></div></div></section>
 <section><div class="wrap"><div class="sec-h"><span class="eyebrow">FAQ</span><h2>Common questions</h2></div><details><summary>How much does a website cost?</summary><p>The price depends on the pages and features you need. Send us a message on WhatsApp with your idea and we will share a clear quote before any work starts.</p></details><details><summary>How long does a project take?</summary><p>A simple website is usually ready within a few days to two weeks. Larger apps take longer, and we give you a timeline up front.</p></details><details><summary>Will my website work on mobile phones?</summary><p>Yes. Every site we build is mobile-first and tested on small phone screens, because most visitors use phones.</p></details><details><summary>Can I update the website myself later?</summary><p>Yes. We build it so common content can be changed easily, or we use WordPress, and we show you how.</p></details><details><summary>Do you offer support after launch?</summary><p>Yes. We help with updates, fixes and improvements after the site goes live.</p></details></div></section>
-<section><div class="wrap"><div class="cta rv"><h2>Have a project in mind?</h2><p>Tell us what you need. We reply on WhatsApp, share a clear plan and a free quote.</p><div class="btns"><a class="btn alt" data-wa href="#">WhatsApp us</a><a class="btn line" data-call href="#">Call <span data-phone>0304 0962799</span></a></div></div></div></section></main>
-<a class="wa" data-wa href="#" aria-label="Chat on WhatsApp"><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 448 512" aria-hidden="true" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"></path></svg></a>
-<footer class="site"><div class="wrap"><div class="cols"><div><a class="brand" href="index.html" style="color:#fff;margin-bottom:10px"><span class="mark">S</span>SUJAG <b style="color:#67e8f9">Creative</b></a><p>We design and build fast, mobile-friendly websites and installable web apps from Khairpur Mir's.</p></div><div><h4>Pages</h4><a href="index.html">Home</a><a href="about.html">About</a><a href="services.html">Services</a><a href="index.html#clients">Clients</a><a href="contact.html">Contact</a></div><div><h4>Contact</h4><a data-call href="#"><span data-phone>0304 0962799</span></a><a data-wa href="#">WhatsApp</a><span data-location>Khairpur Mir's, Sindh, Pakistan</span><span data-socials></span></div></div><div class="copy">&copy; <span data-year>2026</span> SUJAG Creative. All rights reserved.</div></div></footer>
-<script src="site-data.js"></script>
-<script src="site.js"></script>
+<section><div class="wrap"><div class="cta rv"><h2>Have a project in mind?</h2><p>Tell us what you need. We reply on WhatsApp, share a clear plan and a free quote.</p><div class="btns"><a class="btn alt" data-wa href="https://wa.me/923253061605">WhatsApp us</a><a class="btn line" data-call href="tel:+923040962799">Call <span data-phone>0304 0962799</span></a></div></div></div></section></main>
+<a class="wa" data-wa href="https://wa.me/923253061605" aria-label="Chat on WhatsApp"><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 448 512" aria-hidden="true" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"></path></svg></a>
+<footer class="site"><div class="wrap"><div class="cols"><div><a class="brand" href="index.html" style="color:#fff;margin-bottom:10px"><span class="mark">S</span>SUJAG <b style="color:#67e8f9">Creative</b></a><p>We design and build fast, mobile-friendly websites and installable web apps from Khairpur Mir's.</p></div><div><h4>Pages</h4><a href="index.html">Home</a><a href="about.html">About</a><a href="services.html">Services</a><a href="index.html#clients">Clients</a><a href="contact.html">Contact</a></div><div><h4>Contact</h4><a data-call href="tel:+923040962799"><span data-phone>0304 0962799</span></a><a data-wa href="https://wa.me/923253061605">WhatsApp</a><a data-email href="mailto:sujagcreative@gmail.com">sujagcreative@gmail.com</a><span data-location>Khairpur Mir's, Sindh, Pakistan</span><span data-socials></span></div></div><div class="copy">&copy; <span data-year>2026</span> SUJAG Creative. All rights reserved.</div></div></footer>
+<script>
+/* =====================================================================
+   SUJAG CREATIVE - CONTENT FILE (site-data.js)
+   Edit this file to change numbers, contact details and projects.
+   Keep every comma, quote and bracket. One item per line.
+   ===================================================================== */
+
+/* Contact details (used on every page) */
+const SITE = {
+  name: "SUJAG Creative",
+  phone: "0304 0962799",            /* shown on the site */
+  phoneIntl: "923040962799",        /* same number, no + or spaces, starts with 92 */
+  whatsapp: "0325 3061605",
+  whatsappIntl: "923253061605",
+  whatsappMessage: "Hello SUJAG Creative, I would like to discuss a project.",
+  location: "Khairpur Mir's, Sindh, Pakistan",
+  email: "sujagcreative@gmail.com",                        /* add your email here when you have one */
+  socials: [                        /* e.g. {n: "Facebook", u: "https://facebook.com/yourpage"} */
+  ]
+};
+
+/* Home page numbers (they count up when visitors scroll to them) */
+const STATS = { completed: 10, ongoing: 2, happy: 100 };
+
+/* Google Analytics: paste your own Measurement ID, e.g. "G-ABC123XYZ9". Leave "" to switch it off. */
+const GA_ID = "";
+
+/* Projects. type: "website" | "app" | "wordpress" | "design"   status: "Completed" or "Ongoing"
+   Format: {name: "", type: "", status: "", year: "", desc: "", tags: ["", ""], link: "", result: ""} */
+const PROJECTS = [
+  {name: "SALU Community", type: "website", status: "Completed", year: "2026",
+   desc: "An independent student guidance platform for Shah Abdul Latif University, Khairpur, with admissions and merit lists, 28 departments across 7 faculties, seats and fees, scholarships, an aggregate calculator, past papers, quizzes and free mock tests.",
+   tags: ["Education", "Student guidance", "Interactive tools"], link: "https://salucommunity.github.io/",
+   result: ""}
+];
+
+/* Client reviews. Leave empty [] to hide the section.
+   Format: {name: "", role: "", text: ""} */
+const TESTIMONIALS = [
+];
+
+</script>
+<script>
+/* SUJAG Creative site script */
+(function () {
+  "use strict";
+  var $ = function (s, r) { return (r || document).querySelector(s); }, $$ = function (s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
+  var esc = function (t) { return String(t == null ? "" : t).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); };
+  var reduce = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
+  document.documentElement.classList.add("js");
+
+  /* Contact links from site-data.js */
+  var wa = function (msg) { return "https://wa.me/" + SITE.whatsappIntl + "?text=" + encodeURIComponent(msg || SITE.whatsappMessage); };
+  $$("[data-call]").forEach(function (a) { a.href = "tel:+" + SITE.phoneIntl; });
+  $$("[data-wa]").forEach(function (a) { a.href = wa(a.getAttribute("data-msg")); a.target = "_blank"; a.rel = "noopener"; });
+  $$("[data-phone]").forEach(function (e) { e.textContent = SITE.phone; });
+  $$("[data-location]").forEach(function (e) { e.textContent = SITE.location; });
+  $$("[data-email]").forEach(function (e) { if (SITE.email) { e.textContent = SITE.email; e.href = "mailto:" + SITE.email; } else { var r = e.closest(".row") || e; r.hidden = true; } });
+  $$("[data-socials]").forEach(function (e) { e.innerHTML = SITE.socials.map(function (s) { return '<a href="' + esc(s.u) + '" target="_blank" rel="noopener">' + esc(s.n) + "</a>"; }).join(""); });
+  $$("[data-year]").forEach(function (e) { e.textContent = new Date().getFullYear(); });
+
+  $$("[data-whatsapp]").forEach(function (e) { e.textContent = SITE.whatsapp; });
+
+  /* Mobile menu */
+  var bg = $(".burger"), dr = $("#drawer");
+  if (bg && dr) bg.addEventListener("click", function () { var o = dr.classList.toggle("open"); bg.setAttribute("aria-expanded", o); });
+
+  /* Tech logo marquee: duplicate the row so it loops forever */
+  $$(".track").forEach(function (t) { var c = t.innerHTML; t.insertAdjacentHTML("beforeend", c.replace(/<div class="logo"/g, '<div aria-hidden="true" class="logo"')); });
+
+  /* Rotating words in the hero */
+  var rot = $("#rot");
+  if (rot && !reduce) {
+    var w = ["websites", "web apps", "WordPress sites", "UI designs", "installable apps"], i = 0;
+    setInterval(function () { rot.classList.add("out"); setTimeout(function () { i = (i + 1) % w.length; rot.textContent = w[i]; rot.classList.remove("out"); }, 350); }, 2600);
+  }
+
+  /* Manual, keyboard-accessible four-image design carousel. */
+  var slider = $(".reference-slider");
+  if (slider) {
+    var slides = $$(".reference-slide", slider), dots = $$("[data-slide]", slider), current = 0;
+    var captions = ["Education & Learning", "Engineering & SaaS", "Digital Banking", "Beauty & Skincare"];
+    function showSlide(index) {
+      current = (index + slides.length) % slides.length;
+      slides.forEach(function (slide, i) { slide.hidden = i !== current; });
+      dots.forEach(function (dot, i) { dot.classList.toggle("active", i === current); dot.setAttribute("aria-pressed", String(i === current)); });
+      $(".slider-caption", slider).textContent = "0" + (current + 1) + " / 04 — " + captions[current];
+    }
+    $(".previous", slider).addEventListener("click", function () { showSlide(current - 1); });
+    $(".next", slider).addEventListener("click", function () { showSlide(current + 1); });
+    dots.forEach(function (dot) { dot.addEventListener("click", function () { showSlide(+dot.getAttribute("data-slide")); }); });
+    slider.addEventListener("keydown", function (event) { if (event.key === "ArrowLeft" || event.key === "ArrowRight") { event.preventDefault(); showSlide(current + (event.key === "ArrowRight" ? 1 : -1)); } });
+    var touchX = null;
+    slider.addEventListener("touchstart", function (event) { touchX = event.touches[0].clientX; }, {passive: true});
+    slider.addEventListener("touchend", function (event) { if (touchX !== null) { var delta = event.changedTouches[0].clientX - touchX; if (Math.abs(delta) > 50) showSlide(current + (delta < 0 ? 1 : -1)); touchX = null; } }, {passive: true});
+  }
+
+  /* Clone the visible client row without downloading duplicate embedded images. */
+  var clientGroup = $(".clients-group"), duplicateGroup = $(".clients-group[aria-hidden]");
+  if (clientGroup && duplicateGroup) duplicateGroup.innerHTML = clientGroup.innerHTML.replace(/alt="[^"]*"/g, 'alt=""');
+
+  /* Client marquee motion control. */
+  var pauseClients = $(".client-pause"), clientsMarquee = $(".clients-marquee");
+  if (pauseClients && clientsMarquee) pauseClients.addEventListener("click", function () {
+    var paused = clientsMarquee.classList.toggle("paused");
+    pauseClients.setAttribute("aria-pressed", String(paused));
+    pauseClients.textContent = paused ? "Resume scrolling" : "Pause scrolling";
+  });
+
+  /* Testimonials */
+  var tw = $("#testimonials");
+  if (tw && TESTIMONIALS.length) { tw.hidden = false; $("#tGrid", tw).innerHTML = TESTIMONIALS.map(function (t) { return '<div class="card rv"><p>&ldquo;' + esc(t.text) + '&rdquo;</p><h3 style="margin-top:12px">' + esc(t.name) + '</h3><p>' + esc(t.role) + "</p></div>"; }).join(""); }
+
+  /* Counters */
+  function count(el) {
+    var to = +el.getAttribute("data-count"), suf = el.getAttribute("data-suffix") || "";
+    if (reduce) { el.textContent = to + suf; return; }
+    var s = performance.now(), d = 1400;
+    (function tick(n) { var p = Math.min((n - s) / d, 1); el.textContent = Math.round(to * (1 - Math.pow(1 - p, 3))) + suf; if (p < 1) requestAnimationFrame(tick); })(s);
+  }
+  var cmap = { completed: STATS.completed, ongoing: STATS.ongoing, happy: STATS.happy };
+  $$("[data-stat]").forEach(function (e) { e.setAttribute("data-count", cmap[e.getAttribute("data-stat")]); e.textContent = "0" + (e.getAttribute("data-suffix") || ""); });
+
+  /* Scroll reveal + counters */
+  var io = "IntersectionObserver" in window ? new IntersectionObserver(function (es) {
+    es.forEach(function (e) { if (!e.isIntersecting) return; var el = e.target; io.unobserve(el); if (el.hasAttribute("data-count")) count(el); else el.classList.add("in"); });
+  }, { threshold: 0.12 }) : null;
+  function reveal() {
+    var n = 0;
+    $$(".card,.step,.logo,.sec-h,.industry-card").forEach(function (el) { if (!el.classList.contains("rv") && !el.closest(".track")) el.classList.add("rv"); });
+    $$(".rv:not([data-o])").forEach(function (el) { el.setAttribute("data-o", 1); el.style.setProperty("--d", (n++ % 4) * 80 + "ms"); io ? io.observe(el) : el.classList.add("in"); });
+    $$("[data-count]:not([data-o])").forEach(function (el) { el.setAttribute("data-o", 1); io ? io.observe(el) : count(el); });
+  }
+  reveal();
+
+  /* Contact form: opens WhatsApp with the message already written */
+  var f = $("#contactForm");
+  if (f) f.addEventListener("submit", function (e) {
+    e.preventDefault();
+    var v = function (id) { return (document.getElementById(id).value || "").trim(); };
+    var m = "Hello SUJAG Creative,\nName: " + v("fn") + (v("fp") ? "\nPhone: " + v("fp") : "") + "\nProject type: " + v("ft") + "\n\n" + v("fm");
+    window.open(wa(m), "_blank", "noopener");
+  });
+
+  /* Google Analytics (only if you set GA_ID in site-data.js) */
+  if (typeof GA_ID !== "undefined" && GA_ID) {
+    window.dataLayer = window.dataLayer || []; window.gtag = function () { window.dataLayer.push(arguments); };
+    gtag("js", new Date()); gtag("config", GA_ID);
+    var g = document.createElement("script"); g.async = true; g.src = "https://www.googletagmanager.com/gtag/js?id=" + encodeURIComponent(GA_ID); document.head.appendChild(g);
+  }
+})();
+
+</script>
 </body>
 </html>
